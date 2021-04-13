@@ -1,0 +1,36 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: k8scontainerpdb
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sContainerPdb
+  targets:
+  - rego: |
+      package k8scontainerpdb
+
+      violation[{"msg": msg, "details": {}}] {
+        value := input.review.object.spec.minAvailable
+        value == "100%"
+        msg := sprintf("It is not permitted to create pod disruption budgets with minAvailable: %v", [value])
+      }
+
+      violation[{"msg": msg, "details": {}}] {
+        value := input.review.object.spec.maxAvailable
+        value == 0
+        msg := sprintf("It is not permitted to create pod disruption budgets with maxAvailable: %v", [value])
+        }
+
+      violation[{"msg": msg, "details": {}}] {
+        value := input.review.object.spec.maxAvailable
+        value == "0%"
+        msg := sprintf("It is not permitted to create pod disruption budgets with maxAvailable: %v", [value])
+        }
+
+    target: admission.k8s.gatekeeper.sh

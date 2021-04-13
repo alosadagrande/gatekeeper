@@ -1,0 +1,10 @@
+apiVersion: policy/v1beta1 
+kind: PodDisruptionBudget
+metadata:
+  name: pdb-hello-openshift
+  namespace: gatekeeper
+spec:
+  minAvailable: 100%
+  selector:  
+    matchLabels:
+      deployment: hello-openshift

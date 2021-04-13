@@ -1,0 +1,9 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sContainerPdb
+metadata:
+  name: pdb-gt-1
+spec:
+  match:
+    kinds:
+      - apiGroups: ["policy"]
+        kinds: ["PodDisruptionBudget"]
