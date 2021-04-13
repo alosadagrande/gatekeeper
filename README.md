@@ -4,9 +4,9 @@ Here you can find some examples of gatekeeper constraints templates, constraints
 
 Currently I just added a few ones:
 
-* [requiredLabelsSimple](./requiredLabelsSimple/). This is just a simple modification of the requiredLabel library which is focused on the premise that all namespaces in the cluster must have an specific label. In this case *owner*, however it can be easily changed to whatever you prefer.
+* [requiredLabelsSimple](https://github.com/alosadagrande/gatekeeper/tree/main/requiredLabelSimple). This is just a simple modification of the requiredLabel library which is focused on the premise that all namespaces in the cluster must have an specific label. In this case *owner*, however it can be easily changed to whatever you prefer.
 
-* [poddisruptionbudget](./poddisruptionbudget/). This ones is based on the [OpenShift documentation](https://docs.openshift.com/container-platform/4.6/post_installation_configuration/cluster-tasks.html#nodes-pods-configuring-pod-distruption-about_post-install-cluster-tasks) about Pod disruption budgets which states:
+* [poddisruptionbudget](https://github.com/alosadagrande/gatekeeper/tree/main/poddisruptionbudget). This ones is based on the [OpenShift documentation](https://docs.openshift.com/container-platform/4.6/post_installation_configuration/cluster-tasks.html#nodes-pods-configuring-pod-distruption-about_post-install-cluster-tasks) about Pod disruption budgets which states:
 
 > A maxUnavailable of 0% or 0 or a minAvailable of 100% or equal to the number of replicas is permitted but can block nodes from being drained.
 
