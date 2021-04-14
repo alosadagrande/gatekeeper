@@ -28,25 +28,30 @@ spec:
         limits_cpu := input.review.object.spec.template.spec.containers[_].resources.limits.cpu
         requests_cpu := input.review.object.spec.template.spec.containers[_].resources.requests.cpu
         limits_cpu != requests_cpu
-        msg := "CPU limits and requests are different"
+        msg := sprintf("CPU limits and requests are different so it cannot be a Guaranteed QoS: %v", [input.review.object.spec.template.spec.containers[_].resources])
       }
 
       violation[{"msg": msg, "details": {}}] {
         limits_memory := input.review.object.spec.template.spec.containers[_].resources.limits.memory
         requests_memory := input.review.object.spec.template.spec.containers[_].resources.requests.memory
         limits_memory != requests_memory
-        msg := "Memory limits and requests are different"
+        msg := sprintf("Memory limits and requests are different so it cannot be a Guaranteed QoS: %v", [input.review.object.spec.template.spec.containers[_].resources])
       }
 
       violation[{"msg": msg, "details": {}}] {
         value := input.review.object.spec.template.spec.containers[_].resources.limits
         missing(value, "cpu")
-        msg := sprintf("Limit cpu not specified: %v", [value])
+        msg := sprintf("Limit cpu not specified so it cannot be a Guaranteed Qos: %v", [value])
       }
 
       violation[{"msg": msg, "details": {}}] {
         value := input.review.object.spec.template.spec.containers[_].resources.limits
         missing(value, "memory")
-        msg := sprintf("Limit memory not specified: %v", [value])
+        msg := sprintf("Limit memory not specified so it cannot be a Guaranteed QoS: %v", [value])
       }
 
+      violation[{"msg": msg, "details": {}}] {
+        value := input.review.object.spec.template.spec.containers[_].resources
+        missing(value, "limits")
+        msg := sprintf("Limits were not specified so it cannot be a Guaranteed QoS: %v", [input.review.object.spec.template.spec.containers[_].resources])
+      }
