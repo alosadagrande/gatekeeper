@@ -10,7 +10,7 @@ Currently I just added a few ones:
 
 > A maxUnavailable of 0% or 0 or a minAvailable of 100% or equal to the number of replicas is permitted but can block nodes from being drained.
 
-And that's what it is about. Notice that I do not take into account if the deployment and the maxUnavailable value is the same, which is also something that we probably want to avoid in our clusters.
+And that's what it is about. Notice that I do not take into account if the deployment's replicas and the maxUnavailable value are the same, which is also something that we probably want to avoid in our clusters. However, notice as well, that the replica count can be modified once the application has been created and the admission only happens at the moment of creation.
 
 * [onlyqosguaranteed](https://github.com/alosadagrande/gatekeeper/tree/main/onlyguaranteedqos). Basically, only allows to create `deployments` or `deploymentConfigs` from guaranteed quality of service (QoS). If the workload is not guaranteed then the admission controller will not permit to create the resource.
 
