@@ -12,6 +12,6 @@ Currently I just added a few ones:
 
 And that's what it is about. Notice that I do not take into account if the deployment and the maxUnavailable value is the same, which is also something that we probably want to avoid in our clusters.
 
-* [onlyqosguaranteed](https://github.com/alosadagrande/gatekeeper/tree/main/onlyqosguaranteed). Basically, only allows to create `deployments` or `deploymentConfigs` from guaranteed quality of service (QoS). If the workload is not guaranteed then the admission controller will not permit to create the resource.
+* [onlyqosguaranteed](https://github.com/alosadagrande/gatekeeper/tree/main/onlyguaranteedqos). Basically, only allows to create `deployments` or `deploymentConfigs` from guaranteed quality of service (QoS). If the workload is not guaranteed then the admission controller will not permit to create the resource.
 
 > :warning: Important to note that the value of limits and requests, in terms of value must be equal. The constraint template will understand as different a cpu limit of 1 compared with a cpu requests of 1000m (millicores). Even it is the same, I expect the developer to create the resource (requests and limits) with the same units.
