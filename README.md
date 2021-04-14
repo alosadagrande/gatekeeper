@@ -9,7 +9,7 @@ Currently I just added a few ones:
 
 * [poddisruptionbudget](https://github.com/alosadagrande/gatekeeper/tree/main/poddisruptionbudget). This ones is based on the [OpenShift documentation](https://docs.openshift.com/container-platform/4.6/post_installation_configuration/cluster-tasks.html#nodes-pods-configuring-pod-distruption-about_post-install-cluster-tasks) about Pod disruption budgets which states:
 
-> A maxUnavailable of 0% or 0 or a minAvailable of 100% or equal to the number of replicas is permitted but can block nodes from being drained.
+> :info: A maxUnavailable of 0% or 0 or a minAvailable of 100% or equal to the number of replicas is permitted but can block nodes from being drained.
 
 And that's what it is about. Notice that I do not take into account if the deployment's replicas and the maxUnavailable value are the same, which is also something that we probably want to avoid in our clusters. However, notice as well, that the replica count can be modified once the application has been created and the admission control process only happens at the moment of creation. So, eventually, you could end up on a situation where the pdb would have been denied at creation, but now it is not since it the replica count was modified afterwards.
 
