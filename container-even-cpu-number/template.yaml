@@ -1,0 +1,25 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: k8sevencpus
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sEvenCpus
+  targets:
+  - target: admission.k8s.gatekeeper.sh
+    rego: |
+      package k8sevencpus
+
+      violation[{"msg": msg, "details": {}}] {
+        some i
+        limits_cpu := to_number(input.review.object.spec.template.spec.containers[i].resources.limits.cpu)
+        even := limits_cpu % 2
+        even == 1
+        msg := sprintf("CPU limit number must be an even number to avoid noisy neighbours: %v", [input.review.object.spec.template.spec.containers[i].resources])
+      }
