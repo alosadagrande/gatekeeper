@@ -17,9 +17,9 @@ And that's what it is about. Notice that I do not take into account if the deplo
 
 > :warning: Important to note that the value of limits and requests, in terms of value must be equal. The constraint template will understand as different a cpu limit of 1 compared with a cpu requests of 1000m (millicores). Even it is the same, I expect the developer to create the resource (requests and limits) with the same units.
 
-* [container-even-cpu-number](https://github.com/alosadagrande/gatekeeper/tree/main/container-even-cpu-number). It is focused on DPDK applications that wants to avoid noisy neighbour problems. In order to avoid this problem we are forcing the user to request an even number of CPUs so there will be no noisy thread.  Also notice that this policy is likely to be used along with [onlyqosguaranteed](https://github.com/alosadagrande/gatekeeper/tree/main/onlyguaranteedqos) since you require your DPDK application to have a guaranteed QoS. 
+* [container-even-cpu-number](https://github.com/alosadagrande/gatekeeper/tree/main/container-even-cpu-number). It is focused on DPDK applications that want to avoid noisy neighbor problems. In order to avoid this problem, we are forcing the user to request an even number of CPUs so there will be no noisy thread. Also, notice that this policy is likely to be used along with [onlyqosguaranteed](https://github.com/alosadagrande/gatekeeper/tree/main/onlyguaranteedqos)  since you require your DPDK application to have a guaranteed QoS. 
 
-This policy only affects to deployments or deploymentconfigs that has a runtimeClassName assigned. This is needed to avoid load balancing CPUs in DPDK threads, so each thread will always use the same CPUs.
+This policy only affects deployments or deploymentconfigs that have a runtimeClassName assigned. This is needed to avoid load balancing CPUs in DPDK threads, so each thread will always use the same CPUs.
 
 > ❗I assume that the kernel will do as much as possible to place the even number of CPUs in the same core. Take into account that we are also assuming smt enabled.
 
