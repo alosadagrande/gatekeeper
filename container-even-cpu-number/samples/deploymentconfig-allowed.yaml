@@ -25,6 +25,7 @@ spec:
         deploymentconfig: troubleshoot
       annotations:
     spec:
+      runtimeClassName: "test"
       serviceAccount: deployer
       serviceAccountName: deployer
       containers:
@@ -35,11 +36,11 @@ spec:
           terminationMessagePolicy: File
           resources:
             limits:
-              cpu: "1"
+              cpu: "2"
               hugepages-1Gi: 1Gi
               memory: 1000Mi
             requests:
-              cpu: "1"
+              cpu: "2"
               hugepages-1Gi: 1Gi
               memory: 1000Mi
           volumeMounts:

@@ -23,9 +23,10 @@ spec:
           terminationMessagePolicy: File
           resources:
             limits:
+              cpu: "2"
               memory: 100Mi
             requests:
-              cpu: "1"
               memory: 100Mi
       dnsPolicy: ClusterFirst
       restartPolicy: Always
+      runtimeClassName: "test"

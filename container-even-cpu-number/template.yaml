@@ -16,7 +16,16 @@ spec:
     rego: |
       package k8sevencpus
 
+      missing(obj, field) = true {
+        not obj[field]
+      }
+
+      missing(obj, field) = true {
+        obj[field] == ""
+      }
+
       violation[{"msg": msg, "details": {}}] {
+        not missing(input.review.object.spec.template.spec,"runtimeClassName")
         some i
         limits_cpu := to_number(input.review.object.spec.template.spec.containers[i].resources.limits.cpu)
         even := limits_cpu % 2
